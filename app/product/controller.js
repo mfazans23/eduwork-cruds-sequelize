@@ -1,5 +1,3 @@
-const fs = require('fs')
-const path = require('path')
 const { Op } = require('sequelize')
 const Product = require('./model')
 
@@ -41,12 +39,6 @@ const view = async (req, res) => {
 
 const store = async (req, res) => {
   const { users_id, name, price, stock, status } = req.body
-  const image = req.file
-
-  if (image) {
-    const target = path.join(__dirname, '../../uploads', image.originalname)
-    fs.renameSync(image.path, target)
-  }
 
   try {
     await Product.sync()
@@ -56,7 +48,6 @@ const store = async (req, res) => {
       price,
       stock,
       status,
-      image_url: image && `/public/${image.originalname}`,
     })
     success_response(res, product)
   } catch (error) {
@@ -67,12 +58,6 @@ const store = async (req, res) => {
 const update = async (req, res) => {
   const { id } = req.params
   const { name, price, stock, status } = req.body
-  const image = req.file
-
-  if (image) {
-    const target = path.join(__dirname, '../../uploads', image.originalname)
-    fs.renameSync(image.path, target)
-  }
 
   try {
     await Product.sync()
@@ -82,8 +67,6 @@ const update = async (req, res) => {
         price: price && price,
         stock: stock && stock,
         status: status && status,
-        image_url:
-          image && `http://localhost:3000/public/${image.originalname}`,
       },
       {
         where: {
