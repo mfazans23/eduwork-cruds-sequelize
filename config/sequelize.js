@@ -1,9 +1,14 @@
 const { Sequelize } = require('sequelize')
 
-const sequelize = new Sequelize('sql12594565', 'sql12594565', 'QwD4Tls7DT', {
-  host: 'sql12.freesqldatabase.com',
-  dialect: 'mysql',
-})
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.USER,
+  process.env.PASSWORD,
+  {
+    host: process.env.HOST,
+    dialect: 'mysql',
+  }
+)
 ;(async () => {
   try {
     await sequelize.authenticate()
