@@ -23,9 +23,6 @@ const Product = sequelize.define('Product', {
     defaultValue: false,
     allowNull: false,
   },
-  image_url: {
-    type: DataTypes.TEXT,
-  },
 })
 
 module.exports = Product
