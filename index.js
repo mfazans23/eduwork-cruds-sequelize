@@ -10,6 +10,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.get('/', (req, res) => {
+  res.setHeader('Content-Type', 'text/html')
+  res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate')
   res.sendFile(path.join(__dirname, '/index.html'))
 })
 app.use('/api/v1/product', productRouter)
