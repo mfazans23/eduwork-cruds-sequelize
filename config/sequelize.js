@@ -2,10 +2,6 @@ const { Sequelize } = require('sequelize')
 import mysql2 from 'mysql2'
 require('dotenv').config()
 
-if (options.dialect === 'mysql') {
-  options.dialectModule = mysql2
-}
-
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.USER,
